@@ -3,7 +3,7 @@ var commands = [];
 var box_size = 60;
 var x = 800 / box_size;
 var y = 600 / box_size;
-var lvls = 2;
+var lvls = 3;
 
 for (var i = 1; i <= lvls; i++) {
     levels[i] = [];
@@ -87,5 +87,54 @@ commands[2].push('moveUp(steps);');
 commands[2].push('moveDown(steps);');
 commands[2].push('moveLeft(steps);');
 commands[2].push('moveRight(steps);');
-commands[2].push('jump();');
-commands[2].push('attack(attacks);');
+commands[2].push('attack();');
+
+// LEVEL 3 COORDINATES
+levels[3][0][1] = h;
+levels[3][1][1] = h;
+levels[3][2][1] = h;
+levels[3][3][1] = h;
+levels[3][4][1] = m;
+levels[3][5][1] = h;
+levels[3][5][1] = h;
+levels[3][6][1] = h;
+levels[3][7][1] = h;
+levels[3][8][1] = h;
+levels[3][9][1] = h;
+levels[3][10][1] = h;
+levels[3][11][1] = h;
+levels[3][12][1] = bl;
+levels[3][12][2] = v;
+levels[3][12][3] = tl;
+levels[3][11][3] = h;
+levels[3][10][3] = m;
+levels[3][9][3] = h;
+levels[3][8][3] = h;
+levels[3][7][3] = br;
+levels[3][7][4] = tl;
+levels[3][6][4] = h;
+levels[3][5][4] = h;
+levels[3][4][4] = m;
+levels[3][3][4] = br;
+levels[3][3][5] = v;
+levels[3][3][6] = v;
+levels[3][3][7] = v;
+levels[3][3][8] = tr;
+levels[3][4][8] = h;
+levels[3][5][8] = h;
+levels[3][6][8] = h;
+levels[3][7][8] = h;
+levels[3][8][8] = m;
+levels[3][9][8] = h;
+levels[3][10][8] = tl;
+levels[3][10][7] = v;
+levels[3][10][6] = v;
+levels[3][10][5] = p;
+
+
+// LEVEL 3 COMMANDS
+commands[3].push('moveUp(steps);');
+commands[3].push('moveDown(steps);');
+commands[3].push('moveLeft(steps);');
+commands[3].push('moveRight(steps);');
+commands[3].push('attack();');

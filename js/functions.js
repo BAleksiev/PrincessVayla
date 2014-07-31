@@ -12,6 +12,8 @@ function moveUp(steps) {
     var clear_path = true;
     
     for (var i = 1; i <= steps; i++) {
+        checkPossition(pos['x'], pos['y'] - i);
+        
         if(checkCoordinates(pos['x'], pos['y'] - i) === false) {
             clear_path = false;
         }
@@ -44,6 +46,8 @@ function moveDown(steps) {
     var clear_path = true;
     
     for (var i = 1; i <= steps; i++) {
+        checkPossition(pos['x'], pos['y'] + i);
+        
         if(checkCoordinates(pos['x'], pos['y'] + i) === false) {
             clear_path = false;
         }
@@ -76,6 +80,8 @@ function moveLeft(steps) {
     var clear_path = true;
     
     for (var i = 1; i <= steps; i++) {
+        checkPossition(pos['x'] - i, pos['y']);
+        
         if(checkCoordinates(pos['x'] - i, pos['y']) === false) {
             clear_path = false;
         }
@@ -108,6 +114,8 @@ function moveRight(steps) {
     var clear_path = true;
     
     for (var i = 1; i <= steps; i++) {
+        checkPossition(pos['x'] + i, pos['y']);
+        
         if(checkCoordinates(pos['x'] + i, pos['y']) === false) {
             clear_path = false;
         }
@@ -126,4 +134,33 @@ function moveRight(steps) {
         knight.attr('pos', pos_str);
         checkPossition(pos['x'], pos['y']);
     }
+}
+
+function attack() {
+    
+    var pos = getKnightPos();
+    var monster = '';
+    
+    if(levels[current_level][pos['x']][pos['y']+1] === 'monster') {
+        monster = pos['x']+'-'+(pos['y']+1);
+        levels[current_level][pos['x']][pos['y']+1] = v;
+    } else if(levels[current_level][pos['x']][pos['y']-1] === 'monster') {
+        monster = pos['x']+'-'+(pos['y']-1);
+        levels[current_level][pos['x']][pos['y']-1] = v;
+    } else if(levels[current_level][pos['x']+1][pos['y']] === 'monster') {
+        monster = (pos['x']+1)+'-'+pos['y'];
+        levels[current_level][pos['x']+1][pos['y']] = h;
+    } else if(levels[current_level][pos['x']-1][pos['y']] === 'monster') {
+        monster = (pos['x']-1)+'-'+pos['y'];
+        levels[current_level][pos['x']-1][pos['y']] = h;
+    }
+    
+    var cPos = levels[current_level][pos['x']][pos['y']];
+    
+    if(cPos === 'horizontal' || cPos === 'bot-right' || cPos === 'bot-left') {
+        $('#'+monster).removeClass('monster').addClass('horizontal');
+    } else if(cPos === 'vertical' || cPos === 'top-right' || cPos === 'top-left') {
+        $('#'+monster).removeClass('monster').addClass('vertical');
+    }
+    
 }

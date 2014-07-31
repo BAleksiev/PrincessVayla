@@ -1,5 +1,5 @@
-var current_level = localStorage.getItem('current_level');
-//localStorage.setItem('current_level', 2);
+var current_level = parseInt(localStorage.getItem('current_level'));
+//localStorage.setItem('current_level', 1);
 if(!current_level)
     current_level = 1;
 var last_command = '';
@@ -20,10 +20,7 @@ $(document).ready(function() {
     });
 
     $('.popup_mask a.next').click(function() {
-        if(levels[current_level+1]) {
-            current_level++;
-            localStorage.setItem('current_level', current_level);
-        }
+        localStorage.setItem('current_level', current_level+1);
         location.reload();
     });
     
@@ -86,6 +83,8 @@ function render(level) {
                 if (knight === false) {
                     $('.game').append('<div class="knight" pos="' + i + '-' + j + '"></div>');
                     $('.game .knight').css('top', (j * box_size) + 'px').css('left', (i * box_size) + 'px');
+//                    $('.game').append('<div class="knight" pos="10-2"></div>');
+//                    $('.game .knight').css('top', (2 * box_size) + 'px').css('left', (10 * box_size) + 'px');
                     knight = true;
                 }
 
@@ -166,9 +165,16 @@ function checkCoordinates(xPos, yPos) {
 }
 
 function checkPossition(xPos, yPos) {
+    var pos = levels[current_level][xPos][yPos];
+    console.log(pos);
+    console.log(xPos, yPos);
     
-    if(levels[current_level][xPos][yPos] === 'temple') {
+    if(pos === 'temple') {
         loadPopup('Level ' + current_level + ' complete !', 'popup');
+    } else if(pos === 'monster') {
+        loadPopup('The brave knight was killed by monster !', 'gameover');
+    } else if(pos === 'princess') {
+        loadPopup('Congratulations you save the princess !', 'popup');
     }
 }
 
@@ -181,9 +187,13 @@ function loadPopup(message, popup) {
         $('.gameover').show();
     } else if(popup === 'popup') {
         $('.popup').show();
-        if(current_level === lvls) {
+        if(current_level == lvls) {
             $('.popup a.next').hide();
-            $('.popup a.clear').show();
+            showInlineBlock($('.popup a.clear'));
         }
     }
+}
+
+function showInlineBlock(element) {
+    element.css('display', 'inline-block');
 }
